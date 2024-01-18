@@ -1,9 +1,11 @@
-import Image from 'next/image';
+import './globals.css';
+import NewItemDialog from '@/components/new-item-dialog';
 
 export default function Home() {
 	return (
-		<main>
-			<div>Todo app</div>
+		<main className='mx-[10%] my-10'>
+			<h1 className='text-2xl my-2'>Awesome Todo</h1>
+			<NewItemDialog />
 		</main>
 	);
 }
