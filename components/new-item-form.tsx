@@ -44,7 +44,15 @@ export default function NewItemForm(props: {
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
-		props.setState((prevState) => {...prevState, items: prevState.items});
+
+		const newItem = { title: values.title };
+
+		props.setState((prevState) => {
+			return {
+				...prevState,
+				items: [...prevState.items, newItem],
+			};
+		});
 	}
 
 	return (
