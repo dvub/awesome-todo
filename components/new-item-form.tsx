@@ -15,6 +15,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { TodoItemType } from '@/types/TodoItemType';
 
 const formSchema = z.object({
 	title: z.string().min(2, {
@@ -23,7 +24,13 @@ const formSchema = z.object({
 	description: z.string().optional(),
 });
 
-export default function NewItemForm() {
+export default function NewItemForm(props: {
+	setState: React.Dispatch<
+		React.SetStateAction<{
+			items: TodoItemType[];
+		}>
+	>;
+}) {
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -37,7 +44,7 @@ export default function NewItemForm() {
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
-		console.log(values);
+		props.setState((prevState) => {...prevState, items: prevState.items});
 	}
 
 	return (

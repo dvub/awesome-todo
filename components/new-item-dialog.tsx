@@ -9,7 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 import NewItemForm from '@/components/new-item-form';
-export default function NewItemDialog() {
+export default function NewItemDialog(props: { setState: any }) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -19,7 +19,7 @@ export default function NewItemDialog() {
 				<DialogHeader>
 					<DialogTitle>Add New todo</DialogTitle>
 					<DialogDescription>Add some stuff!</DialogDescription>
-					<NewItemForm />
+					<NewItemForm setState={props.setState} />
 				</DialogHeader>
 			</DialogContent>
 		</Dialog>
