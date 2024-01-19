@@ -15,6 +15,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { DialogClose } from '@/components/ui/dialog'
 import { TodoItemType } from '@/types/TodoItemType';
 
 const formSchema = z.object({
@@ -42,10 +43,7 @@ export default function NewItemForm(props: {
 
 	// 2. Define a submit handler.
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-
-		const newItem = { title: values.title };
+		const newItem = { title: values.title, description: values.description };
 
 		props.setState((prevState) => {
 			return {
@@ -53,6 +51,8 @@ export default function NewItemForm(props: {
 				items: [...prevState.items, newItem],
 			};
 		});
+    form.setValue('description', '');
+    form.setValue('title', '');
 	}
 
 	return (
@@ -91,7 +91,13 @@ export default function NewItemForm(props: {
 						</FormItem>
 					)}
 				/>
+        <div className='w-full flex justify-between'>
+
+          <DialogClose>
+            <Button type="button" variant="secondary">Close</Button>
+          </DialogClose>
 				<Button type='submit'>Submit</Button>
+        </div>
 			</form>
 		</Form>
 	);
